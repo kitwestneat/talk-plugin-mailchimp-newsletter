@@ -1,0 +1,11 @@
+{
+  "name": "talk-plugin-mailchimp-newsletter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/kitwestneat/talk-plugin-mailchimp-newsletter",
+  "author": "Kit Westneat <kit.westneat@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "mailchimp-api-v3": "^1.8.0"
+  }
+}
