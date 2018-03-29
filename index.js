@@ -1,7 +1,7 @@
 const debug = require('debug')('talk:plugin:mailchimp-newsletter');
 const Mailchimp = require('mailchimp-api-v3')
 
-function subUser(email_address) {
+async function subUser(email_address) {
   if (!mailchimp) {
     console.warn('Mailchimp plugin requires TALK_MAILCHIMP_API_KEY and TALK_MAILCHIMP_LIST_ID env parameters');
   }
@@ -33,7 +33,7 @@ module.exports = {
     const broker = getBroker();
 
     // The passed in method will fire for every user that is created.
-    broker.on('userCreated', user => {
+    broker.on('userCreated', async user => {
       if (user.profiles.length == 0) {
         debug(`cannot determine email address for user: ` + JSON.stringify(user));
         return;
