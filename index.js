@@ -7,14 +7,21 @@ async function subUser(email_address) {
   }
 
   // 'subscribed' (single opt-in) or 'pending' (double opt-in)
+  let list_id = process.env.TALK_MAILCHIMP_LIST_ID;
+  let interest_id = process.env.TALK_MAILCHIMP_INTEREST_ID;
   let status = process.env.TALK_MAILCHIMP_USER_STATUS || 'pending';
 
   debug(`adding ${email_address} with status ${status}`);
 
-  return mailchimp.post(`/lists/${process.env.TALK_MAILCHIMP_LIST_ID}/members`, {
+  let payload = {
     email_address,
     status,
-  });
+  };
+  if (interest_id) {
+    payload.interests = { [interest_id]: true };
+  }
+
+  return mailchimp.post(`/lists/${list_id}/members`, payload);
 }
 
 let mailchimp;
